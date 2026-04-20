@@ -374,7 +374,7 @@ define('STATS_TABLE', 'stats');
 define('ALLOW_ORIGIN', 'http://localhost');
 
 // Métodos HTTP aceptados.
-define('ALLOW_METHODS', 'POST, GET, PUT, DELETE, OPTIONS');
+define('ALLOW_METHODS', 'POST, GET, PUT, DELETE, OPTIONS, PATCH');
 
 // Cabeceras permitidas
 define('ALLOW_HEADERS', 'csrf_token');

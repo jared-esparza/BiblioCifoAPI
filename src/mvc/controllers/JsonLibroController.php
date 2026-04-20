@@ -53,4 +53,29 @@ class JsonLibroController extends Controller{
 
         return $response;
     }
+
+    public function put():JsonResponse{
+        $libros = request()->fromJson('Libro');
+        $response = new JsonResponse([], "Actualizacioón correcta");
+        foreach($libros as $libro){
+            try{
+                if(empty($libro->id)){
+                    throw new ApiException("No se indicó el identificador");
+                }
+                $libro->update();
+                $response->addData("$libro->titulo actualizado correctamente");
+
+            }catch(Throwable $t){
+                $response->evaluateError($t);
+                $response->setMessage("Se han producido errores");
+                $response->setStatus("WITH ERRORS");
+                $response->addData($libro->titulo . " " .(DEBUG ? $t->getMessage() : "Duplicado?"));
+            }
+        }
+            return $response;
+    }
+
+    public function patch():JsonResponse{
+        return $this->put();
+    }
 }
